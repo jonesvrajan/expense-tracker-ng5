@@ -47,6 +47,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 import { AppComponent, DialogOverviewExampleDialog } from './app.component';
 import { ExpenseService } from './services/expense.service';
+import { ExpenseListComponent } from './expense-list/expense-list.component';
 
 @NgModule({
   exports: [
@@ -82,14 +83,16 @@ import { ExpenseService } from './services/expense.service';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-  ]
+  ],
+  //declarations: [ExpenseListComponent]
 })
 export class MaterialModule {}
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    ExpenseListComponent
   ],
   
   imports: [
