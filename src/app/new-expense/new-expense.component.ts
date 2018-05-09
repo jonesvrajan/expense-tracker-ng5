@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-
 import {Expense} from '../class/expense';
 import {ExpenseService} from '../services/expense.service';
 import {FormControl} from '@angular/forms';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-new-expense',
@@ -21,14 +21,23 @@ export class NewExpenseComponent implements OnInit {
   ngOnInit() {
   }
 
+  fullDate: string;
+
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.fullDate = (`${event.value.getDate()}/${event.value.getMonth()}/${event.value.getFullYear()}`);
+    
+  }
+
   newExpense(): void {
     this.submitted = false;
     this.expense = new Expense();
   }
 
   save() {
+    this.expense.date = this.fullDate
     this.expenseService.createExpense(this.expense);
     this.expense = new Expense();
+  
   }
 
   onSubmit() {

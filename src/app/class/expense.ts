@@ -2,7 +2,7 @@ export class Expense {
     key: string;
     amount: number;
     description: string;
-    date: number;
+    date: any;
     year: number;
     weekOfYear: number;
   }
