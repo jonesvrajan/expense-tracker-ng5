@@ -49,6 +49,7 @@ import { AppComponent, DialogOverviewExampleDialog } from './app.component';
 import { ExpenseService } from './services/expense.service';
 import { ExpenseListComponent } from './expense-list/expense-list.component';
 import { NewExpenseComponent } from './new-expense/new-expense.component';
+import { ExpenseDetailsComponent } from './expense-details/expense-details.component';
 
 @NgModule({
   exports: [
@@ -94,7 +95,8 @@ export class MaterialModule {}
     AppComponent,
     DialogOverviewExampleDialog,
     ExpenseListComponent,
-    NewExpenseComponent
+    NewExpenseComponent,
+    ExpenseDetailsComponent
   ],
   
   imports: [

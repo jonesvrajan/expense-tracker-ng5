@@ -1,3 +1,7 @@
-<p>
-  expense-list works!
-</p>
+<h1>Expenses</h1>
+<div *ngFor="let expense of expenses" style="width: 300px;">
+	<app-expense-details [expense]='expense'></app-expense-details>
+</div>
+<div style="margin-top:20px;">
+	<button type="button" class="button btn-danger" (click)='deleteExpenses()'>Delete All</button>
+</div>

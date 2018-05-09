@@ -1,0 +1,19 @@
+<div *ngIf="expense">
+	<div>
+		<label>First Name: </label> {{expense.name}}
+	</div>
+	<div>
+		<label>Age: </label> {{expense.age}}
+	</div>
+	<div>
+		<label>Active: </label> {{expense.active}}
+	</div>
+
+	<span class="button is-small btn-primary" *ngIf='expense.active' (click)='updateActive(false)'>Inactive</span>
+	
+	<span class="button is-small btn-primary" *ngIf='!expense.active' (click)='updateActive(true)'>Active</span>
+
+	<span class="button is-small btn-danger" (click)='deleteExpense()'>Delete</span>
+	
+	<hr/>
+</div>
