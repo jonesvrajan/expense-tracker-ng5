@@ -48,6 +48,7 @@ import { environment } from '../environments/environment';
 import { AppComponent, DialogOverviewExampleDialog } from './app.component';
 import { ExpenseService } from './services/expense.service';
 import { ExpenseListComponent } from './expense-list/expense-list.component';
+import { NewExpenseComponent } from './new-expense/new-expense.component';
 
 @NgModule({
   exports: [
@@ -84,7 +85,7 @@ import { ExpenseListComponent } from './expense-list/expense-list.component';
     MatToolbarModule,
     MatTooltipModule,
   ],
-  //declarations: [ExpenseListComponent]
+  
 })
 export class MaterialModule {}
 
@@ -92,7 +93,8 @@ export class MaterialModule {}
   declarations: [
     AppComponent,
     DialogOverviewExampleDialog,
-    ExpenseListComponent
+    ExpenseListComponent,
+    NewExpenseComponent
   ],
   
   imports: [
