@@ -46,6 +46,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 import { AppComponent, DialogOverviewExampleDialog } from './app.component';
+import { ExpenseService } from './services/expense.service';
 
 @NgModule({
   exports: [
@@ -103,7 +104,7 @@ export class MaterialModule {}
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // for database
   ],
-  providers: [],
+  providers: [ExpenseService],
   entryComponents: [AppComponent, DialogOverviewExampleDialog],
   bootstrap: [AppComponent]
 })
