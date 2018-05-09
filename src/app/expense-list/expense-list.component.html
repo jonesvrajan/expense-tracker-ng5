@@ -1,4 +1,14 @@
 <h1>Expenses</h1>
+<mat-form-field class="example-full-width">
+    <input matInput placeholder="State" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let expense of expenses" [value]="expense.description">
+        
+        <span>{{ expense.description }}</span> |
+        <small>Population: {{expense.amount}}</small>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
 <div *ngFor="let expense of expenses" style="width: 300px;">
 	<app-expense-details [expense]='expense'></app-expense-details>
 </div>

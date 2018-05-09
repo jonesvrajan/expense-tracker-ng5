@@ -13,6 +13,7 @@ export class ExpenseService {
   constructor(private db: AngularFireDatabase) {
     this.expensesRef = db.list(this.dbPath);
   }
+  
  
   createExpense(expense: Expense): void {
     this.expensesRef.push(expense);
