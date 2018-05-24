@@ -5,6 +5,9 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Subject } from 'rxjs/Subject';
+
 
 @Component({
   selector: 'app-expense-list',
@@ -12,14 +15,23 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
   styleUrls: ['./expense-list.component.scss']
 })
 export class ExpenseListComponent implements OnInit {
-  expensesRef: AngularFireList<Expense> = null;
+
   expenses: any;
   stateCtrl: FormControl;
   filteredStates: Observable<any[]>;
   private dbPath = '/expenses';
+  searchterm: string;
+ 
+  startAt = new Subject();
+  endAt = new Subject();
+ 
+  allexpenses;
+ 
+  startobs = this.startAt.asObservable();
+  endobs = this.endAt.asObservable();
   
-  constructor(private expenseService: ExpenseService, private db: AngularFireDatabase) { 
-    this.expensesRef = db.list(this.dbPath);
+  constructor(private expenseService: ExpenseService, private afs: AngularFirestore) { 
+    
     this.stateCtrl = new FormControl();
     this.filteredStates = this.stateCtrl.valueChanges
       .pipe(
@@ -35,7 +47,11 @@ export class ExpenseListComponent implements OnInit {
 
   ngOnInit() {
     this.getExpensesList();
-    console.log(this.expensesRef)
+    Observable.combineLatest(this.startobs, this.endobs).subscribe((value) => {
+      this.firequery(value[0], value[1]).subscribe((expenses) => {
+        this.expenses = expenses;
+      })
+    })
   }
 
   getExpensesList() {
@@ -50,6 +66,25 @@ export class ExpenseListComponent implements OnInit {
 
   deleteExpenses() {
     this.expenseService.deleteAll();
+  }
+
+  search($event) {
+    let q = $event.target.value;
+    if (q != '') {
+      this.startAt.next(q);
+      this.endAt.next(q + "\uf8ff");
+    }
+    else {
+      this.expenses = this.allexpenses;
+    }
+  }
+ 
+  firequery(start, end) {
+    return this.afs.collection('expenses', ref => ref.limit(4).orderBy('description').startAt(start).endAt(end)).valueChanges();
+  }
+ 
+  getallexpenses() {
+    return this.afs.collection('expenses', ref => ref.orderBy('description')).valueChanges();
   }
 
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Expense } from '../class/expense';
 import { QueryFn } from 'angularfire2/database/interfaces';
+import {FirebaseListObservable } from "angularfire2/database-deprecated";
  
 @Injectable()
 export class ExpenseService {

@@ -44,6 +44,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreModule} from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 import { AppComponent, DialogOverviewExampleDialog } from './app.component';
 import { ExpenseService } from './services/expense.service';
@@ -109,6 +110,7 @@ export class MaterialModule {}
     MatNativeDateModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(),
     AngularFireDatabaseModule, // for database
   ],
   providers: [ExpenseService],
